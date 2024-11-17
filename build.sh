@@ -53,7 +53,7 @@ sudo cl-builder-profile --id "${BUILD_ID}" -u -f --url "${GIT_URL}" "${PROFILE_N
 echo "[+] Second build update with new profile"
 sudo cl-builder-update --id "${BUILD_ID}" --scan ON -e -f
 
-echo "[+] Building image..."
-sudo cl-builder-image --id "${BUILD_ID}" -f -V OFF --keep-tree OFF -c zstd --image "/var/calculate/linux/${BUILD_ID}-${LAST_DATE:: -1}-x86_64.iso"
+#echo "[+] Building image..."
+#sudo cl-builder-image --id "${BUILD_ID}" -f -V OFF --keep-tree OFF -c zstd --image "/var/calculate/linux/${BUILD_ID}-${LAST_DATE:: -1}-x86_64.iso"
 
 exit 0
