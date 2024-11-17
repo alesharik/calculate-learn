@@ -22,8 +22,8 @@ function download_iso() {
     ISO_NAME=$(w3m -dump $LAST_NIGHTLY | grep ${CALC_DIST}- | grep ".iso" | cut -d ' ' -f 1)
     echo "[*] ISO NAME: ${ISO_NAME}"
 
-    curl ${LAST_NIGHTLY}${ISO_NAME} -o $ISO_NAME
-    echo "[+] ISO is downloaded"
+    curl ${LAST_NIGHTLY}${ISO_NAME} -o dist.iso
+    echo "[+] ISO is downloaded into dist.iso"
 }
 
 echo "[+] Reading active build"
@@ -37,10 +37,12 @@ if [ ! -z "$strarr" ]; then
 	sudo cl-builder-break --id "${BUILD_ID}" --clear ON --clear-pkg ON -f || true
 fi
 
-download_iso
+if [ ! -f "$FILE" ]; then
+  download_iso
+fo
 
 echo "[+] Prepare new build"
-sudo cl-builder-prepare --id "${BUILD_ID}" --iso "${ISO_NAME}" -f
+sudo cl-builder-prepare --id "${BUILD_ID}" --iso "dist.iso" -f
 
 echo "[+] First build update without update package, only portage tree and overlays"
 sudo cl-builder-update --id "${BUILD_ID}" --scan ON -s -e -f
