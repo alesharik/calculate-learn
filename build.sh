@@ -37,7 +37,7 @@ if [ ! -z "$strarr" ]; then
 	sudo cl-builder-break --id "${BUILD_ID}" --clear ON --clear-pkg ON -f || true
 fi
 
-if [ ! -f "$FILE" ]; then
+if [ ! -f dist.iso ]; then
   download_iso
 fi
 
