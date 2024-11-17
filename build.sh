@@ -5,7 +5,7 @@ GIT_URL='https://github.com/alesharik/calculate-learn'
 
 CALC_DIST="cldx"
 BUILD_ID="cldx"
-PROFILE_NAME="CLDX"
+PROFILE_NAME="CLDX/amd64/20"
 
 function download_iso() {
     ## Find last available nightly data
@@ -26,8 +26,7 @@ function download_iso() {
     echo "[+] ISO is downloaded"
 }
 
-
-echo "Reading active build"
+echo "[+] Reading active build"
 ## Read active cl build id
 IFS=' '
 # shellcheck disable=SC2046
