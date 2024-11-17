@@ -39,7 +39,7 @@ fi
 
 if [ ! -f "$FILE" ]; then
   download_iso
-fo
+fi
 
 echo "[+] Prepare new build"
 sudo cl-builder-prepare --id "${BUILD_ID}" --iso "dist.iso" -f
