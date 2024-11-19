@@ -50,10 +50,20 @@ sudo cl-builder-update --id "${BUILD_ID}" --scan ON -s -e -f
 echo "[+] Change profile to necessary"
 sudo cl-builder-profile --id "${BUILD_ID}" -u -f --url "${GIT_URL}" "${PROFILE_NAME}"
 
+echo "[+] Configuring world"
+echo "app-editors/nano" > /var/calculate/builder/${BUILD_ID}/var/lib/portage/world
+echo "app-misc/mc" > /var/calculate/builder/${BUILD_ID}/var/lib/portage/world
+echo "sys-process/atop" > /var/calculate/builder/${BUILD_ID}/var/lib/portage/world
+echo "xfce-extra/xfce4-whiskermenu-plugin" > /var/calculate/builder/${BUILD_ID}/var/lib/portage/world
+echo "app-editors/vscodium" > /var/calculate/builder/${BUILD_ID}/var/lib/portage/world
+echo "dev-dotnet/dotnet-sdk" > /var/calculate/builder/${BUILD_ID}/var/lib/portage/world
+echo "virtual/jdk" > /var/calculate/builder/${BUILD_ID}/var/lib/portage/world
+echo "app-emulation/qemu" > /var/calculate/builder/${BUILD_ID}/var/lib/portage/world
+
 echo "[+] Second build update with new profile"
 sudo cl-builder-update --id "${BUILD_ID}" --scan ON -e -f
 
-#echo "[+] Building image..."
-#sudo cl-builder-image --id "${BUILD_ID}" -f -V OFF --keep-tree OFF -c zstd --image "/var/calculate/linux/${BUILD_ID}-${LAST_DATE:: -1}-x86_64.iso"
+echo "[+] Building image..."
+sudo cl-builder-image --id "${BUILD_ID}" -f -V OFF --keep-tree OFF -c zstd --image "/var/calculate/builder/${BUILD_ID}-${LAST_DATE:: -1}-x86_64.iso"
 
 exit 0
