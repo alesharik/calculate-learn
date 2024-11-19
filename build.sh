@@ -26,6 +26,11 @@ function download_iso() {
     echo "[+] ISO is downloaded into dist.iso"
 }
 
+function emerge() {
+  echo "[*] Adding $1 to world"
+  echo "$1" >> "/var/calculate/builder/${BUILD_ID}/var/lib/portage/world"
+}
+
 echo "[+] Reading active build"
 ## Read active cl build id
 IFS=' '
@@ -51,14 +56,14 @@ echo "[+] Change profile to necessary"
 sudo cl-builder-profile --id "${BUILD_ID}" -u -f --url "${GIT_URL}" "${PROFILE_NAME}"
 
 echo "[+] Configuring world"
-echo "app-editors/nano" > /var/calculate/builder/${BUILD_ID}/var/lib/portage/world
-echo "app-misc/mc" > /var/calculate/builder/${BUILD_ID}/var/lib/portage/world
-echo "sys-process/atop" > /var/calculate/builder/${BUILD_ID}/var/lib/portage/world
-echo "xfce-extra/xfce4-whiskermenu-plugin" > /var/calculate/builder/${BUILD_ID}/var/lib/portage/world
-echo "app-editors/vscodium" > /var/calculate/builder/${BUILD_ID}/var/lib/portage/world
-echo "dev-dotnet/dotnet-sdk" > /var/calculate/builder/${BUILD_ID}/var/lib/portage/world
-echo "virtual/jdk" > /var/calculate/builder/${BUILD_ID}/var/lib/portage/world
-echo "app-emulation/qemu" > /var/calculate/builder/${BUILD_ID}/var/lib/portage/world
+emerge "app-editors/nano"
+emerge "app-misc/mc"
+emerge "sys-process/atop"
+emerge "xfce-extra/xfce4-whiskermenu-plugin"
+emerge "app-editors/vscodium"
+emerge "dev-dotnet/dotnet-sdk"
+emerge "virtual/jdk"
+emerge "app-emulation/qemu"
 
 echo "[+] Second build update with new profile"
 sudo cl-builder-update --id "${BUILD_ID}" --scan ON -e -f
